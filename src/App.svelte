@@ -1,8 +1,13 @@
 <script>
+  import Mousetrap from "mousetrap";
+  let title = "my intention";
   const setTitle = () => {
     window.electronAPI.setTitle(title);
   };
-  let title = "my intention";
+  Mousetrap.bind("ctrl+`", () => {
+    debugger;
+    window.electronAPI.toggleWindow();
+  });
 </script>
 
 <main>

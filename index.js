@@ -1,7 +1,7 @@
 const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain } = require("electron");
 const path = require("path");
 
-let openDevTools = false;
+let openDevTools = true;
 let tray;
 let mainWindow;
 
@@ -51,6 +51,7 @@ app.whenReady().then(function () {
   tray.on("click", toggleWindow);
 
   ipcMain.on("set-title", handleSetTitle);
+  ipcMain.on("toggle-window", toggleWindow);
   // if (is.osx()) {
   //   app.dock.hide();
   // }

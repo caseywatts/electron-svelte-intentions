@@ -19,6 +19,7 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "mousetrap": "^1.6.5",
     "sirv-cli": "^2.0.0"
   },
   "main": "index.js"
