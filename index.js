@@ -1,7 +1,7 @@
-const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain } = require("electron");
+const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain, globalShortcut } = require("electron");
 const path = require("path");
 
-let openDevTools = true;
+let openDevTools = false;
 let tray;
 let mainWindow;
 
@@ -49,6 +49,10 @@ app.whenReady().then(function () {
   };
 
   tray.on("click", toggleWindow);
+
+  globalShortcut.register("Control+`", () => {
+    toggleWindow();
+  });
 
   ipcMain.on("set-title", handleSetTitle);
   ipcMain.on("toggle-window", toggleWindow);
