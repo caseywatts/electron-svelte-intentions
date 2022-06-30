@@ -24,14 +24,41 @@ function createWindow() {
 }
 
 const setUpTrayAndContextMenu = function () {
-  const icon = nativeImage.createFromPath("hae.png");
+  const icon = nativeImage.createFromPath("focus.png");
   traySetup = new Tray(icon);
 
   traySetup.setTitle("");
   // traySetup.setToolTip("lol tooltip");
-  // const contextMenu = Menu.buildFromTemplate([{ role: "quit" }]);
-  // traySetup.setContextMenu(contextMenu);
+  const contextMenu = Menu.buildFromTemplate([
+    {
+      label: "Show/Hide Intention Window",
+      accelerator: "control+`",
+      click: async () => {
+        toggleWindow();
+      },
+    },
+    { type: "separator" },
+    { role: "about" },
+    { role: "quit" },
+  ]);
+  // Menu.setApplicationMenu(menu);
+  // const contextMenu = Menu.buildFromTemplate([
+  //   { label: "Item1", type: "radio" },
+  //   { label: "Item2", type: "radio" },
+  //   { label: "Item3", type: "radio", checked: true },
+  //   { label: "Item4", type: "radio" },
+  // ]);
+  traySetup.setContextMenu(contextMenu);
+
   return traySetup;
+};
+
+const toggleWindow = () => {
+  if (mainWindow.isVisible()) {
+    mainWindow.hide();
+  } else {
+    mainWindow.show();
+  }
 };
 
 app.whenReady().then(function () {
@@ -42,18 +69,10 @@ app.whenReady().then(function () {
     // const webContents = event.sender;
     // const win = BrowserWindow.fromWebContents(webContents);
     // win.setTitle(title);
-    tray.setTitle(title);
+    tray.setTitle(` ${title}`);
   }
 
-  const toggleWindow = () => {
-    if (mainWindow.isVisible()) {
-      mainWindow.hide();
-    } else {
-      mainWindow.show();
-    }
-  };
-
-  tray.on("click", toggleWindow);
+  // tray.on("click", toggleWindow);
 
   globalShortcut.register("Control+`", () => {
     toggleWindow();

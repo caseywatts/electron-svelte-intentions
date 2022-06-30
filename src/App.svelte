@@ -33,7 +33,21 @@
   main {
     font-family: "Quicksand", sans-serif;
     font-weight: 300;
+    margin: 0;
+    padding: 0;
   }
+  form {
+    margin: 0;
+    padding: 0;
+  }
+  input {
+    margin: 0;
+    outline-color: #ae90da;
+    outline-width: 10px;
+  }
+  /* input:focus {
+    outline-color: red;
+  } */
   .intention-input {
     width: 300px;
     text-align: center;
