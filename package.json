@@ -5,7 +5,8 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron ."
+    "start": "electron .",
+    "package-macos": "npx electron-packager . intentions --platform='darwin'"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
