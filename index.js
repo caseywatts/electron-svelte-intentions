@@ -4,16 +4,21 @@ const path = require("path");
 let openDevTools = false;
 let tray;
 let mainWindow;
+let icons;
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
+    width: 400,
+    height: 100,
     webPreferences: {
       preload: path.join(__dirname, "preload.js"),
     },
+    frame: false,
   });
   mainWindow.loadFile("public/index.html");
   if (openDevTools) {
     mainWindow.webContents.openDevTools();
+    // mainWindow.webContents.openDevTools({ mode: "detach" });
   }
   return mainWindow;
 }
@@ -22,7 +27,7 @@ const setUpTrayAndContextMenu = function () {
   const icon = nativeImage.createFromPath("hae.png");
   traySetup = new Tray(icon);
 
-  traySetup.setTitle("initial");
+  traySetup.setTitle("");
   // traySetup.setToolTip("lol tooltip");
   // const contextMenu = Menu.buildFromTemplate([{ role: "quit" }]);
   // traySetup.setContextMenu(contextMenu);
@@ -56,9 +61,25 @@ app.whenReady().then(function () {
 
   ipcMain.on("set-title", handleSetTitle);
   ipcMain.on("toggle-window", toggleWindow);
-  // if (is.osx()) {
-  //   app.dock.hide();
-  // }
+  app.dock.hide();
+  mainWindow.on("close", (ev) => {
+    ev.sender.hide();
+    ev.preventDefault(); // prevent quit process
+  });
+  mainWindow.on("blur", (ev) => {
+    ev.sender.hide();
+    // ev.preventDefault(); // prevent quit process
+  });
+
+  // icons = new BrowserWindow({
+  //   show: false,
+  //   webPreferences: { offscreen: true },
+  // });
+  // icons.loadURL("https://trends.google.com/trends/hottrends/visualize");
+  // icons.webContents.on("paint", (event, dirty, image) => {
+  //   if (tray) tray.setImage(image.resize({ width: 16, height: 16 }));
+  // });
+
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) createWindow();
   });
