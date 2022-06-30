@@ -1,20 +1,30 @@
 <script>
   // import Mousetrap from "mousetrap";
-  let title = "";
-  const setTitle = () => {
-    window.electronAPI.setTitle(title);
+  let placeholder = "set your intention";
+  let title;
+  const updateTitle = () => {
+    // if it's an actual keystroke, not a control key?
+    if (title.length > 0) {
+      placeholder = title;
+      window.electronAPI.setTitle(title);
+    }
   };
   const hideWindow = () => {
+    title = "";
     window.electronAPI.toggleWindow();
   };
   const setTitleAndHideWindow = () => {
-    setTitle();
+    updateTitle();
     hideWindow();
   };
   // Mousetrap.bind("ctrl+`", () => {
   //   debugger;
   //   window.electronAPI.toggleWindow();
   // });
+  const resetItPls = () => {
+    placeholder = title;
+    title = "";
+  };
 </script>
 
 <main style="text-align:center; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
@@ -23,7 +33,7 @@
   </div>
   <div>
     <form on:submit|preventDefault>
-      <div><input autofocus class="intention-input" type="text" bind:value={title} placeholder="set your intention" on:keyup={setTitle} /></div>
+      <div><input autofocus class="intention-input" type="text" bind:value={title} {placeholder} on:keyup={updateTitle} /></div>
       <div style="display:none; margin-top: 10px;"><button on:click={setTitleAndHideWindow}>Update</button></div>
     </form>
   </div>

@@ -93,7 +93,10 @@ app.whenReady().then(function () {
   // }
   // });
   mainWindow.on("blur", (ev) => {
+    // when app is blurred away, save the tile then clear it to be ready next time
+    // ev.sender.webContents.executeJavaScript("setTitleAndHideWindow()").then(() => {
     ev.sender.hide();
+    // });
     // ev.preventDefault(); // prevent quit process
   });
 
@@ -106,7 +109,13 @@ app.whenReady().then(function () {
   //   if (tray) tray.setImage(image.resize({ width: 16, height: 16 }));
   // });
 
+  // mainWindow.on("show", () => {
+  //   mainWindow.webContents.executeJavaScript("resetItPls()");
+  // });
+
   app.on("activate", () => {
-    if (BrowserWindow.getAllWindows().length === 0) createWindow();
+    if (BrowserWindow.getAllWindows().length === 0) {
+      mainWindow = createWindow();
+    }
   });
 });
