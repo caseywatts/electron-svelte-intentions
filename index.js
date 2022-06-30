@@ -57,6 +57,7 @@ const setUpTrayAndContextMenu = function () {
 const toggleWindow = () => {
   if (mainWindow.isVisible()) {
     mainWindow.hide();
+    if (process.platform == "darwin") app.hide();
   } else {
     mainWindow.show();
   }
