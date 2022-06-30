@@ -81,10 +81,15 @@ app.whenReady().then(function () {
   ipcMain.on("set-title", handleSetTitle);
   ipcMain.on("toggle-window", toggleWindow);
   app.dock.hide();
-  mainWindow.on("close", (ev) => {
-    ev.sender.hide();
-    ev.preventDefault(); // prevent quit process
-  });
+  // mainWindow.on("close", (ev) => {
+  // ev.sender.hide();
+  // if (ev.sender.isVisible()) {
+  //   ev.sender.hide();
+  //   // ev.preventDefault(); // prevent quit process
+  // } else {
+  //   // let it fully quit
+  // }
+  // });
   mainWindow.on("blur", (ev) => {
     ev.sender.hide();
     // ev.preventDefault(); // prevent quit process
