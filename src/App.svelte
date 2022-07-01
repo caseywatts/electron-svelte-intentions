@@ -1,5 +1,4 @@
 <script>
-  // import Mousetrap from "mousetrap";
   let placeholder = "set your intention";
   let title;
   const updateTitle = () => {
@@ -12,32 +11,34 @@
     windowClosedReset();
     window.electronAPI.toggleWindow();
   };
-  const setTitleAndHideWindow = () => {
-    updateTitle();
-    hideWindow();
-  };
   window.electronAPI.onAppBlurred(() => {
     windowClosedReset();
   });
-  // Mousetrap.bind("ctrl+`", () => {
-  //   debugger;
-  //   window.electronAPI.toggleWindow();
-  // });
   const windowClosedReset = () => {
     if (title.length > 0) {
       placeholder = title;
       title = "";
     }
   };
+  const setTitleAndHideWindow = () => {
+    updateTitle();
+    hideWindow();
+  };
+
+  // const iconPath = path.join(__static, "/focus.png");
+  const iconPath = "./focus.png";
 </script>
 
 <main style="text-align:center; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
   <div>
-    <!-- <h2 style="margin-top:0px; font-weight:300;">What is your next intention?</h2> -->
+    <!-- <h2 style="margin:0; margin-bottom:3px; font-weight:300;">Intention</h2> -->
   </div>
   <div>
     <form on:submit|preventDefault>
-      <div><input autofocus class="intention-input" type="text" bind:value={title} {placeholder} on:keyup={updateTitle} /></div>
+      <div style="display:flex; justify-content: center; align-items: center;">
+        <img style="margin-right: 10px;" height="26" src={iconPath} alt="Intentions app logo" />
+        <input autofocus class="intention-input" type="text" bind:value={title} {placeholder} on:keyup={updateTitle} />
+      </div>
       <div style="display:none; margin-top: 10px;"><button on:click={setTitleAndHideWindow}>Update</button></div>
     </form>
   </div>
