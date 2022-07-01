@@ -1,17 +1,23 @@
 {
-  "name": "svelte-app",
+  "name": "intentions",
+  "description": "MacOS menubar app for focusing. Declare your next intention.",
   "version": "1.0.0",
+  "author": "Casey Watts! @heycaseywattsup",
   "private": true,
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
     "start": "electron .",
-    "package-macos": "npx electron-packager . intentions --platform='darwin'"
+    "package-macos": "npx electron-packager . intentions --platform='darwin'",
+    "package": "electron-builder",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "electron": "^19.0.6",
+    "electron-builder": "^23.1.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -20,8 +26,12 @@
     "svelte": "^3.0.0"
   },
   "dependencies": {
+    "dotenv": "^16.0.1",
     "mousetrap": "^1.6.5",
     "sirv-cli": "^2.0.0"
   },
-  "main": "index.js"
+  "main": "index.js",
+  "build": {
+    "appId": "com.caseywatts.intentions"
+  }
 }

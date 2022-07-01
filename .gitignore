@@ -2,3 +2,10 @@
 /public/build/
 
 .DS_Store
+
+.env*
+!.env.project
+!.env.vault
+
+dist
+build
