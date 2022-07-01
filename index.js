@@ -4,7 +4,6 @@ const path = require("path");
 let openDevTools = false;
 let tray;
 let mainWindow;
-let icons;
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -18,7 +17,6 @@ function createWindow() {
   mainWindow.loadFile("public/index.html");
   if (openDevTools) {
     mainWindow.webContents.openDevTools();
-    // mainWindow.webContents.openDevTools({ mode: "detach" });
   }
   return mainWindow;
 }
@@ -26,10 +24,7 @@ function createWindow() {
 const setUpTrayAndContextMenu = function () {
   const iconPath = path.resolve(__dirname, "focus.png");
   const icon = nativeImage.createFromPath(iconPath);
-  traySetup = new Tray(icon);
 
-  traySetup.setTitle("");
-  // traySetup.setToolTip("lol tooltip");
   const contextMenu = Menu.buildFromTemplate([
     {
       label: "Show/Hide Intention Window",
@@ -42,13 +37,9 @@ const setUpTrayAndContextMenu = function () {
     { role: "about" },
     { role: "quit" },
   ]);
-  // Menu.setApplicationMenu(menu);
-  // const contextMenu = Menu.buildFromTemplate([
-  //   { label: "Item1", type: "radio" },
-  //   { label: "Item2", type: "radio" },
-  //   { label: "Item3", type: "radio", checked: true },
-  //   { label: "Item4", type: "radio" },
-  // ]);
+
+  traySetup = new Tray(icon);
+  traySetup.setTitle("");
   traySetup.setContextMenu(contextMenu);
 
   return traySetup;
@@ -68,13 +59,8 @@ app.whenReady().then(function () {
   tray = setUpTrayAndContextMenu();
 
   function handleSetTitle(event, title) {
-    // const webContents = event.sender;
-    // const win = BrowserWindow.fromWebContents(webContents);
-    // win.setTitle(title);
     tray.setTitle(` ${title}`);
   }
-
-  // tray.on("click", toggleWindow);
 
   globalShortcut.register("Control+`", () => {
     toggleWindow();
@@ -83,36 +69,11 @@ app.whenReady().then(function () {
   ipcMain.on("set-title", handleSetTitle);
   ipcMain.on("toggle-window", toggleWindow);
   app.dock.hide();
-  // mainWindow.on("close", (ev) => {
-  // ev.sender.hide();
-  // if (ev.sender.isVisible()) {
-  //   ev.sender.hide();
-  //   // ev.preventDefault(); // prevent quit process
-  // } else {
-  //   // let it fully quit
-  // }
-  // });
+
   mainWindow.on("blur", (ev) => {
-    // when app is blurred away, save the tile then clear it to be ready next time
-    // ev.sender.webContents.executeJavaScript("setTitleAndHideWindow()").then(() => {
     ev.sender.webContents.send("app-blurred");
     ev.sender.hide();
-    // });
-    // ev.preventDefault(); // prevent quit process
   });
-
-  // icons = new BrowserWindow({
-  //   show: false,
-  //   webPreferences: { offscreen: true },
-  // });
-  // icons.loadURL("https://trends.google.com/trends/hottrends/visualize");
-  // icons.webContents.on("paint", (event, dirty, image) => {
-  //   if (tray) tray.setImage(image.resize({ width: 16, height: 16 }));
-  // });
-
-  // mainWindow.on("show", () => {
-  //   mainWindow.webContents.executeJavaScript("resetItPls()");
-  // });
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {

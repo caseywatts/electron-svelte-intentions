@@ -2,7 +2,6 @@
   let placeholder = "set your intention";
   let title;
   const updateTitle = () => {
-    // if it's an actual keystroke, not a control key?
     if (title.length > 0) {
       window.electronAPI.setTitle(title);
     }
@@ -25,14 +24,10 @@
     hideWindow();
   };
 
-  // const iconPath = path.join(__static, "/focus.png");
   const iconPath = "./focus.png";
 </script>
 
 <main style="text-align:center; display:flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-  <div>
-    <!-- <h2 style="margin:0; margin-bottom:3px; font-weight:300;">Intention</h2> -->
-  </div>
   <div>
     <form on:submit|preventDefault>
       <div style="display:flex; justify-content: center; align-items: center;">
@@ -60,14 +55,8 @@
     outline-color: #ae90da;
     outline-width: 10px;
   }
-  /* input:focus {
-    outline-color: red;
-  } */
   .intention-input {
     width: 300px;
     text-align: center;
   }
-  /* input[type="text"]::first-line {
-    background-color: gold;
-  } */
 </style>
