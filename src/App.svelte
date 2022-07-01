@@ -5,25 +5,29 @@
   const updateTitle = () => {
     // if it's an actual keystroke, not a control key?
     if (title.length > 0) {
-      placeholder = title;
       window.electronAPI.setTitle(title);
     }
   };
   const hideWindow = () => {
-    title = "";
+    windowClosedReset();
     window.electronAPI.toggleWindow();
   };
   const setTitleAndHideWindow = () => {
     updateTitle();
     hideWindow();
   };
+  window.electronAPI.onAppBlurred(() => {
+    windowClosedReset();
+  });
   // Mousetrap.bind("ctrl+`", () => {
   //   debugger;
   //   window.electronAPI.toggleWindow();
   // });
-  const resetItPls = () => {
-    placeholder = title;
-    title = "";
+  const windowClosedReset = () => {
+    if (title.length > 0) {
+      placeholder = title;
+      title = "";
+    }
   };
 </script>
 

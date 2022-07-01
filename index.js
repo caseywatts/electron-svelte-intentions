@@ -95,6 +95,7 @@ app.whenReady().then(function () {
   mainWindow.on("blur", (ev) => {
     // when app is blurred away, save the tile then clear it to be ready next time
     // ev.sender.webContents.executeJavaScript("setTitleAndHideWindow()").then(() => {
+    ev.sender.webContents.send("app-blurred");
     ev.sender.hide();
     // });
     // ev.preventDefault(); // prevent quit process
