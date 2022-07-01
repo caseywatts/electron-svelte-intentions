@@ -10,8 +10,8 @@
     "start": "electron .",
     "package-macos": "npx electron-packager . intentions --platform='darwin'",
     "package": "electron-builder",
-    "pack": "electron-builder --dir",
-    "dist": "electron-builder"
+    "pack": "electron-builder --universal --dir",
+    "dist": "electron-builder --universal"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^17.0.0",
@@ -32,6 +32,17 @@
   },
   "main": "index.js",
   "build": {
-    "appId": "com.caseywatts.intentions"
+    "appId": "com.caseywatts.intentions",
+    "mac": {
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    }
   }
 }
