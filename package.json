@@ -32,17 +32,10 @@
   },
   "main": "index.js",
   "build": {
+    "icon": "icon.png",
     "appId": "com.caseywatts.intentions",
     "mac": {
-      "target": [
-        {
-          "target": "dmg",
-          "arch": [
-            "x64",
-            "arm64"
-          ]
-        }
-      ]
+      "artifactName": "${productName}-mac.${ext}"
     }
   }
 }
