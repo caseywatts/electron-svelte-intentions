@@ -1,6 +1,6 @@
 {
-  "name": "intentions",
-  "description": "MacOS menubar app for focusing. Declare your next intention.",
+  "name": "intentionize.me",
+  "description": "MacOS menubar app for focus. Declare your next intention.",
   "version": "1.0.0",
   "author": "Casey Watts! @heycaseywattsup",
   "private": true,
@@ -33,7 +33,7 @@
   "main": "index.js",
   "build": {
     "icon": "icon.png",
-    "appId": "com.caseywatts.intentions",
+    "appId": "me.intentionize",
     "mac": {
       "artifactName": "${productName}-mac.${ext}"
     }
