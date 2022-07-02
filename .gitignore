@@ -8,3 +8,4 @@
 !.env.vault
 
 dist
+.svelte-kit
