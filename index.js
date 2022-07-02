@@ -1,5 +1,10 @@
 const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain, globalShortcut } = require("electron");
+const { app, autoUpdater } = require("electron");
 const path = require("path");
+
+const server = "https://intentionize-me-update-server.vercel.app/";
+const url = `${server}/update/${process.platform}/${app.getVersion()}`;
+autoUpdater.setFeedURL({ url });
 
 let openDevTools = false;
 let tray;
