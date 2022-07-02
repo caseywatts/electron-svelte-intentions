@@ -4,6 +4,7 @@ const path = require("path");
 let openDevTools = false;
 let tray;
 let mainWindow;
+let appJustOpened = true;
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -71,8 +72,13 @@ app.whenReady().then(function () {
   app.dock.hide();
 
   mainWindow.on("blur", (ev) => {
-    ev.sender.webContents.send("app-blurred");
-    ev.sender.hide();
+    if (appJustOpened) {
+      return;
+    } else {
+      appJustOpened = false;
+      ev.sender.webContents.send("app-blurred");
+      ev.sender.hide();
+    }
   });
 
   app.on("activate", () => {
