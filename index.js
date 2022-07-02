@@ -1,5 +1,4 @@
-const { app, BrowserWindow, Tray, Menu, nativeImage, ipcMain, globalShortcut } = require("electron");
-const { app, autoUpdater } = require("electron");
+const { app, autoUpdater, BrowserWindow, Tray, Menu, nativeImage, ipcMain, globalShortcut } = require("electron");
 const path = require("path");
 
 const server = "https://intentionize-me-update-server.vercel.app/";
