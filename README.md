@@ -11,7 +11,7 @@ Notice the next "prep for small business call" at the top ✨
 
 ## Installation
 
-To use the app, download the `dmg` file from the [latest release](https://github.com/caseywatts/intentions/releases)
+To use the app, download it from the [latest release](https://github.com/caseywatts/intentions/releases)
 
 ## Development
 
