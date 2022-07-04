@@ -7,17 +7,22 @@
   "scripts": {
     "build": "rollup -c",
     "dev": "rollup -c -w",
-    "start": "electron .",
+    "start": "electron-forge start",
     "package-macos": "npx electron-packager . intentions --platform='darwin'",
-    "package": "electron-builder",
+    "package": "electron-forge package",
     "pack": "electron-builder --universal --dir",
-    "dist": "electron-builder --universal"
+    "dist": "electron-builder --universal",
+    "make": "electron-forge make"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.64",
+    "@electron-forge/maker-deb": "^6.0.0-beta.64",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.64",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.64",
+    "@electron-forge/maker-zip": "^6.0.0-beta.64",
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-node-resolve": "^11.0.0",
     "electron": "^19.0.6",
-    "electron-builder": "^23.1.0",
     "rollup": "^2.3.4",
     "rollup-plugin-css-only": "^3.1.0",
     "rollup-plugin-livereload": "^2.0.0",
@@ -27,6 +32,7 @@
   },
   "dependencies": {
     "dotenv": "^16.0.1",
+    "electron-squirrel-startup": "^1.0.0",
     "mousetrap": "^1.6.5",
     "sirv-cli": "^2.0.0"
   },
@@ -38,6 +44,35 @@
       "artifactName": "${productName}-mac.${ext}",
       "publish": [
         "github"
+      ]
+    }
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {
+        "icon": "icons/icon.icns"
+      },
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "intentionize.me"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
       ]
     }
   }
