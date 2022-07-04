@@ -27,7 +27,7 @@ function createWindow() {
 }
 
 const setUpTrayAndContextMenu = function () {
-  const iconPath = path.resolve(__dirname, "focus.png");
+  const iconPath = path.resolve(__dirname, "focus-white-16.png");
   const icon = nativeImage.createFromPath(iconPath);
 
   const contextMenu = Menu.buildFromTemplate([
