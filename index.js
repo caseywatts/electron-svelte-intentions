@@ -40,7 +40,10 @@ const setUpTrayAndContextMenu = function () {
     },
     { type: "separator" },
     { role: "about" },
-    { role: "quit" },
+    {
+      role: "quit",
+      accelerator: "command+q",
+    },
   ]);
 
   traySetup = new Tray(icon);
