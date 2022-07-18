@@ -1,7 +1,7 @@
 {
   "name": "intentionize.me",
   "description": "MacOS menubar app for focus. Declare your next intention.",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "author": "Casey Watts! @heycaseywattsup",
   "private": true,
   "scripts": {
