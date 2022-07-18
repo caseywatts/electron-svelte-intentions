@@ -51,7 +51,8 @@
       "publish": [
         "github"
       ]
-    }
+    },
+    "afterSign": "scripts/notarize.js"
   },
   "config": {
     "forge": "./forge.config.js"
