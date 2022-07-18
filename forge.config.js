@@ -5,7 +5,7 @@ module.exports = {
     icon: "icons/icon.icns",
     osxSign: {
       "hardened-runtime": true,
-      gatekeeperAssess: false,
+      "gatekeeper-assess": false,
       entitlements: "entitlements.plist",
       "entitlements-inherit": "entitlements.plist",
       "signature-flags": "library",
