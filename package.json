@@ -43,7 +43,7 @@
     "icon": "icon.png",
     "appId": "me.intentionize",
     "mac": {
-      "artifactName": "${productName}-mac.${ext}",
+      "artifactName": "${productName} (mac).${ext}",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
       "entitlements": "build/entitlements.mac.plist",
